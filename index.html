@@ -140,7 +140,7 @@
         function boxRender(btn) {
             const inputNodes = btn.parentElement.querySelectorAll('input')
             const rack = document.getElementById('rack')
-console.dir(rack)
+
             const boxes = [];
 
             inputNodes.forEach(node => {
@@ -150,7 +150,7 @@ console.dir(rack)
                 })
             })
             const unique = getUnique(lengthCheck(permutation(boxes)).sort((a, b) => b.length - a.length), boxes)
-            console.log(unique)
+            rack.innerHTML = '';
 
             unique.forEach( shelfItem => {
                 const shelf = document.createElement('div');
@@ -168,11 +168,7 @@ console.dir(rack)
 
             })
 
-
-
-
         }
-
         const btnSizes = document.querySelector(".btn_sizes")
         btnSizes.addEventListener('click', function handler(event) {
 
