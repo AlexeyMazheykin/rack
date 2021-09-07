@@ -144,10 +144,7 @@
             const boxes = [];
 
             inputNodes.forEach(node => {
-                boxes.push({
-                    name: node.dataset.name,
-                    length: +node.value
-                })
+
             })
             const unique = getUnique(lengthCheck(permutation(boxes)).sort((a, b) => b.length - a.length), boxes)
             rack.innerHTML = '';
@@ -197,7 +194,7 @@
 
     getAmount();
 
-    function permutation(inputArr) {
+    /*function permutation(inputArr) {
         let results = [];
 
         function permute(arr, memo) {
@@ -216,7 +213,7 @@
         }
 
         return permute(inputArr);
-    }
+    }*/
 
     function sum(arr) {
         let sum = 0
@@ -284,6 +281,49 @@
 
         return shelf
     }
+
+
+
+  /*  const boxes = [774, 214, 694, 321, 674, 527, 100, 567]
+    const length = 1310
+    boxes.sort((a, b) => b - a)
+
+    let rack = [];
+
+    function sum(arr) {
+        let sum = 0
+        for (let i = 0; i < arr.length; i++) {
+            sum += arr[i]
+        }
+        return sum
+    }
+
+
+    let count = 0
+    function rec(arr) {
+        let temp = arr.slice(1)
+        if (arr.length === 0 ) {
+            return rack
+        }
+
+        rack[count] = []
+        rack[count][0] = arr[0];
+
+
+        for (let i = 0; i < temp.length; i++) {
+            if (sum(rack[count]) + temp[i] < length) {
+                rack[count].push(temp[i])
+                temp[i] = null
+            }
+        }
+        let changeArr = temp.filter(el=>el!==null)
+        count++
+        return rec(changeArr)
+    }
+
+    console.log(rec(boxes))
+    */
+
 
 </script>
 </body>
