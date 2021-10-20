@@ -81,8 +81,8 @@
 
             const inputsArr = Array.from(event.target.parentElement.querySelectorAll('input'))
 
-            const maxWidth = +event.target.parentElement.parentElement.style.maxWidth.replace('px', '')
-
+            //const maxWidth = +event.target.parentElement.parentElement.style.maxWidth.replace('px', '')
+let maxWidth = 20
             const inputArrToCheck = inputsArr.map(item => item.value)
 
             if (inputArrToCheck.indexOf('') >= 0) {
