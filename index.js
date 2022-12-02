@@ -1,4 +1,5 @@
 'use strict'
+const SHELF_LENGTH = 1310
 function getAmount() {
 
     function sizesRender(btn, input) {
@@ -63,7 +64,7 @@ function getSizes() {
             shelfItem.forEach(boxItem => {
                 const box = document.createElement('div');
                 box.classList.add('box')
-                box.style.flex = `0 1 ${boxItem.length}px`;
+                box.style.flex = `0 1 ${boxItem.length*100/SHELF_LENGTH}%`;
                 //    box.style.height = shelf.style * 70 / 100 + '%'
                 box.innerText = `${boxItem.length}мм`
                 shelf.appendChild(box)
@@ -136,7 +137,7 @@ function lengthCheck(arr) {
     let result = []
 
     for (let i = 0; i < arr.length; i++) {
-        while (sum(arr[i]) > 1170) {
+        while (sum(arr[i]) > SHELF_LENGTH) {
             arr[i].pop()
         }
         if (arr[i].length > 0) {
