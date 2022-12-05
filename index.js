@@ -1,5 +1,5 @@
 'use strict'
-const SHELF_LENGTH = 1310
+const SHELF_LENGTH = 20
 function getAmount() {
 
     function sizesRender(btn, input) {
@@ -18,7 +18,7 @@ function getAmount() {
              <div class="input_item input_sizes">
                 <label>
                     <p>Введите длину ${i}-й коробки </p>
-                    <p><input id="sizes_input_${i}" type="text" class="input" data-name="${i}" ></p>
+                    <p><input id="sizes_input_${i}" type="text" class="input" data-name="${i}"></p>
                 </label>
              </div>
         `)
@@ -36,7 +36,6 @@ function getAmount() {
     const amountBtn = document.querySelector("#btn_amount")
     amountBtn.addEventListener("click", function handler(event) {
         sizesRender(event.target, amountInput)
-
     })
 }
 
@@ -54,7 +53,10 @@ function getSizes() {
                 length: +node.value
             })
         })
-        const unique = getUnique(lengthCheck(permutation(boxes)).sort((a, b) => b.length - a.length), boxes)
+        let checked = lengthCheck(permutation(boxes))
+        //let sorting = checked.sort((a, b) => b.length - a.length)
+        let sorting = checked.sort((a,b)=>sum(b) - sum(a))
+        const unique = getUnique(sorting, boxes)
         rack.innerHTML = '';
 
         unique.forEach(shelfItem => {
