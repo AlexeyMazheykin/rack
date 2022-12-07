@@ -61,7 +61,7 @@ function getSizes() {
         })
         let checked = lengthCheck(permutation(boxes))
         //let sorting = checked.sort((a, b) => b.length - a.length)
-        let sorting = checked.sort((a, b) => sum(b.length) - sum(a.length))
+        let sorting = checked.sort((a, b) => sum(b) - sum(a))
         const unique = getUnique(sorting, boxes)
         rack.innerHTML = '';
 
