@@ -91,10 +91,10 @@ function getSizes() {
 
         } else {
 
-            const toLong = inputArrToCheck.some(item => item > maxWidth)
+            const toLong = inputArrToCheck.some(item => item > SHELF_LENGTH)
 
             if (toLong) {
-                alert(`Коробка больше ${maxWidth}`)
+                alert(`Коробка больше ${SHELF_LENGTH}`)
             } else {
                 boxRender(event.target)
             }
