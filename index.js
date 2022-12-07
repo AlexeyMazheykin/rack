@@ -1,5 +1,6 @@
 'use strict'
 let SHELF_LENGTH = 0
+
 function getAmount() {
 
     function sizesRender(btn, inputAmount, inputSize) {
@@ -7,10 +8,10 @@ function getAmount() {
         const amountValue = inputAmount.value
         const size = inputSize.value
         if (amountValue !== '' && amountValue > 0) {
-            if (size <= 0  || size === '') {
-                alert('Введите размер полки')
+            if (/^[1-9]\d*$/.test(size) === false) {
+                alert('Введите корректный размер полки')
                 return
-            } else SHELF_LENGTH = size;
+            } else SHELF_LENGTH = +size;
 
             if (amountValue > 10) {
                 alert("Введите целое число меньше 11")
@@ -52,7 +53,6 @@ function getSizes() {
         const rack = document.getElementById('rack')
 
         const boxes = [];
-
         inputNodes.forEach(node => {
             boxes.push({
                 name: node.dataset.name,
@@ -61,7 +61,7 @@ function getSizes() {
         })
         let checked = lengthCheck(permutation(boxes))
         //let sorting = checked.sort((a, b) => b.length - a.length)
-        let sorting = checked.sort((a,b)=>sum(b) - sum(a))
+        let sorting = checked.sort((a, b) => sum(b) - sum(a))
         const unique = getUnique(sorting, boxes)
         rack.innerHTML = '';
 
@@ -72,7 +72,7 @@ function getSizes() {
             shelfItem.forEach(boxItem => {
                 const box = document.createElement('div');
                 box.classList.add('box')
-                box.style.flex = `0 1 ${boxItem.length*100/SHELF_LENGTH}%`;
+                box.style.flex = `0 1 ${boxItem.length * 100 / SHELF_LENGTH}%`;
                 //    box.style.height = shelf.style * 70 / 100 + '%'
                 box.innerText = `${boxItem.length}мм`
                 shelf.appendChild(box)
@@ -92,8 +92,8 @@ function getSizes() {
 
         const inputArrToCheck = inputsArr.map(item => item.value)
 
-        if (inputArrToCheck.indexOf('') >= 0) {
-            alert("ВВедите все значения")
+        if (inputArrToCheck.some(el=> /^[1-9]\d*$/.test(el) === false)) {
+            alert("ВВедите корректные значения длин")
 
         } else {
 
