@@ -1,11 +1,17 @@
 'use strict'
-const SHELF_LENGTH = 20
+let SHELF_LENGTH = 0
 function getAmount() {
 
-    function sizesRender(btn, input) {
+    function sizesRender(btn, inputAmount, inputSize) {
         const parent = btn.parentElement
-        const amountValue = input.value
+        const amountValue = inputAmount.value
+        const size = inputSize.value
         if (amountValue !== '' && amountValue > 0) {
+            if (size <= 0  || size === '') {
+                alert('Введите размер полки')
+                return
+            } else SHELF_LENGTH = size;
+
             if (amountValue > 10) {
                 alert("Введите целое число меньше 11")
             } else {
@@ -14,7 +20,6 @@ function getAmount() {
 
                     parent.insertAdjacentHTML
                     ('beforeend', `
-
              <div class="input_item input_sizes">
                 <label>
                     <p>Введите длину ${i}-й коробки </p>
@@ -34,8 +39,9 @@ function getAmount() {
 
     const amountInput = document.querySelector('#amount_input')
     const amountBtn = document.querySelector("#btn_amount")
+    const shelfSize = document.querySelector('#width_input')
     amountBtn.addEventListener("click", function handler(event) {
-        sizesRender(event.target, amountInput)
+        sizesRender(event.target, amountInput, shelfSize)
     })
 }
 
@@ -192,14 +198,6 @@ function getUnique(arr, sourceArr) {
 
     return shelf
 }
-
-
-
-
-
-
-
-
 
 
 
