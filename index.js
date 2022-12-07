@@ -151,8 +151,8 @@ function lengthCheck(arr) {
         if (arr[i].length > 0) {
             result.push(arr[i])
         }
-
     }
+    window.checkedArr = result
     return result
 }
 
@@ -167,10 +167,8 @@ function getUnique(arr, sourceArr) {
 
     let rest = arr.filter((el, index, arr) => {
 
-        let res = true
         for (let i = 0; i < el.length; i++) {
             if (keys.includes(el[i].name)) {
-                res = false
                 return false;
             }
         }
@@ -187,7 +185,7 @@ function getUnique(arr, sourceArr) {
     shelf.forEach(el => {
         arrToCompare.push(...el)
     })
-    const compArr = []
+
 
     sourceArr.forEach(el => {
         const f = arrToCompare.find(item => item.name === el.name)
@@ -198,28 +196,31 @@ function getUnique(arr, sourceArr) {
 
     return shelf
 }
+const uniq2 = (arr) => {
+    arr.sort((a, b)=>sum(b)-sum(a))
+    const shelves = arr.splice(0,1)
+    let keys = shelves[0].map(({name}) => name)
 
+    while (arr.length > 0) {
+        arr.sort((a, b)=>sum(b)-sum(a))
+        arr.forEach((elAr, i)=>{
+            keys.forEach(key=>{
+                let index
+                index = elAr.findIndex(({name})=>name===key)
+                if(index !== -1) {
+                    elAr.splice(index,1)
+                }
+            })
+            if (elAr.length === 0) {
+                arr.splice(i,1)
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        })
+        if (arr.length > 0) {
+            keys = keys.concat(arr[0].map(({name}) => name))
+            shelves.push(...arr.splice(0,1))
+        }
+    }
+    debugger
+}
+//uniq2(window.checkedArr)
