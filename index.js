@@ -61,8 +61,8 @@ function getSizes() {
         })
         let checked = lengthCheck(permutation(boxes))
         //let sorting = checked.sort((a, b) => b.length - a.length)
-        let sorting = checked.sort((a, b) => sum(b) - sum(a))
-        const unique = getUnique(sorting, boxes)
+        //let sorting = checked.sort((a, b) => sum(b) - sum(a))
+        const unique = uniq2(checked)
         rack.innerHTML = '';
 
         unique.forEach(shelfItem => {
@@ -156,46 +156,47 @@ function lengthCheck(arr) {
     return result
 }
 
-function getUnique(arr, sourceArr) {
+// function getUnique(arr, sourceArr) {
+//
+//     let shelf = []
+//     let keys = []
+//     arr[0].forEach(item => {
+//         keys.push(item.name)
+//     })
+//     shelf[0] = arr[0];
+//
+//     let rest = arr.filter((el, index, arr) => {
+//
+//         for (let i = 0; i < el.length; i++) {
+//             if (keys.includes(el[i].name)) {
+//                 return false;
+//             }
+//         }
+//         el.forEach(item => {
+//             keys.push(item.name)
+//         })
+//         return true
+//     })
+//
+//     shelf = shelf.concat(rest);
+//
+//     let arrToCompare = []
+//
+//     shelf.forEach(el => {
+//         arrToCompare.push(...el)
+//     })
+//
+//
+//     sourceArr.forEach(el => {
+//         const f = arrToCompare.find(item => item.name === el.name)
+//         if (f === undefined) {
+//             shelf.push([el])
+//         }
+//     })
+//
+//     return shelf
+// }
 
-    let shelf = []
-    let keys = []
-    arr[0].forEach(item => {
-        keys.push(item.name)
-    })
-    shelf[0] = arr[0];
-
-    let rest = arr.filter((el, index, arr) => {
-
-        for (let i = 0; i < el.length; i++) {
-            if (keys.includes(el[i].name)) {
-                return false;
-            }
-        }
-        el.forEach(item => {
-            keys.push(item.name)
-        })
-        return true
-    })
-
-    shelf = shelf.concat(rest);
-
-    let arrToCompare = []
-
-    shelf.forEach(el => {
-        arrToCompare.push(...el)
-    })
-
-
-    sourceArr.forEach(el => {
-        const f = arrToCompare.find(item => item.name === el.name)
-        if (f === undefined) {
-            shelf.push([el])
-        }
-    })
-
-    return shelf
-}
 const uniq2 = (arr) => {
     arr.sort((a, b)=>sum(b)-sum(a))
     const shelves = arr.splice(0,1)
@@ -203,7 +204,7 @@ const uniq2 = (arr) => {
 
     while (arr.length > 0) {
         arr.sort((a, b)=>sum(b)-sum(a))
-        arr.forEach((elAr, i)=>{
+        arr.forEach((elAr)=>{
             keys.forEach(key=>{
                 let index
                 index = elAr.findIndex(({name})=>name===key)
@@ -211,16 +212,14 @@ const uniq2 = (arr) => {
                     elAr.splice(index,1)
                 }
             })
-            if (elAr.length === 0) {
-                arr.splice(i,1)
-            }
-
         })
+        arr = arr.filter(el=>el.length>0).sort((a, b)=>sum(b)-sum(a))
         if (arr.length > 0) {
-            keys = keys.concat(arr[0].map(({name}) => name))
-            shelves.push(...arr.splice(0,1))
+            const mem = arr.splice(0,1)[0]
+            shelves.push(mem)
+            keys.push(...mem.map(({name}) => name))
         }
     }
-    debugger
+    return shelves
 }
 //uniq2(window.checkedArr)
