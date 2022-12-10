@@ -215,7 +215,8 @@ const uniq2 = (arr) => {
         })
         arr = arr.filter(el=>el.length>0).sort((a, b)=>sum(b)-sum(a))
         if (arr.length > 0) {
-            const mem = arr.splice(0,1)[0]
+
+            const mem = arr.shift()
             shelves.push(mem)
             keys.push(...mem.map(({name}) => name))
         }
