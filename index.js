@@ -198,7 +198,10 @@ function lengthCheck(arr) {
 // }
 
 const uniq2 = (arr) => {
+
+    arr.sort((a,b) => a.length - b.length)
     arr.sort((a, b)=>sum(b)-sum(a))
+
     const shelves = arr.splice(0,1)
     let keys = shelves[0].map(({name}) => name)
 
